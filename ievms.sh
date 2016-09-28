@@ -166,7 +166,7 @@ install_unar() {
     local url="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/theunarchiver/unar1.5.zip"
     local archive=`basename "${url}"`
 
-    download "unar" "${url}" "${archive}" "1932287921a23b9a0c27a189a9efd8ed"
+    download "unar" "${url}" "${archive}" "fbf544d1332c481d7d0f4e3433fbe53b"
 
     unzip "${archive}" || fail "Failed to extract ${ievms_home}/${archive} to ${ievms_home}/, unzip command returned error code $?"
     mv unar/* .
