@@ -41,6 +41,7 @@ log()  { printf '%s\n' "$*" ; return $? ; }
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
 
 check_md5() {
+    log "MD5 check skipped for ${1}"
 }
 
 # Download a URL to a local file. Accepts a name, URL and file.
