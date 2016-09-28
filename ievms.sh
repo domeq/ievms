@@ -166,7 +166,7 @@ install_unar() {
     local url="https://bitbucket.org/WAHa_06x36/theunarchiver/get/unar-1.5.zip"
     local archive=`basename "${url}"`
 
-    download "unar" "${url}" "${archive}" "543739741dd1653393ff5a411c5c8b98"
+    download "unar" "${url}" "${archive}" "1932287921a23b9a0c27a189a9efd8ed"
 
     unzip "${archive}" || fail "Failed to extract ${ievms_home}/${archive} to ${ievms_home}/, unzip command returned error code $?"
 
