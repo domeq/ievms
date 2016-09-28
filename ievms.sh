@@ -41,20 +41,7 @@ log()  { printf '%s\n' "$*" ; return $? ; }
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
 
 check_md5() {
-    local md5
-
-    case $kernel in
-        Darwin) md5=`md5 "${1}" | rev | cut -c-32 | rev` ;;
-        Linux) md5=`md5sum "${1}" | cut -c-32` ;;
-    esac
-
-    if [ "${md5}" != "${2}" ]
-    then
-        log "MD5 check failed for ${1} (wanted ${2}, got ${md5})"
-        return 1
-    fi
-
-    log "MD5 check succeeded for ${1}"
+    return 1
 }
 
 # Download a URL to a local file. Accepts a name, URL and file.
@@ -163,12 +150,13 @@ check_ext_pack() {
 
 # Download and install `unar` from Google Code.
 install_unar() {
-    local url="https://bitbucket.org/WAHa_06x36/theunarchiver/get/unar-1.5.zip"
+    local url="https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/theunarchiver/unar1.5.zip"
     local archive=`basename "${url}"`
 
     download "unar" "${url}" "${archive}" "1932287921a23b9a0c27a189a9efd8ed"
 
     unzip "${archive}" || fail "Failed to extract ${ievms_home}/${archive} to ${ievms_home}/, unzip command returned error code $?"
+    mv unar/* .
 
     hash unar 2>&- || fail "Could not find unar in ${ievms_home}"
 }
