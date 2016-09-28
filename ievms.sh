@@ -41,7 +41,20 @@ log()  { printf '%s\n' "$*" ; return $? ; }
 fail() { log "\nERROR: $*\n" ; exit 1 ; }
 
 check_md5() {
-    log "MD5 check skipped for ${1}"
+    local md5
+
+    case $kernel in
+        Darwin) md5=`md5 "${1}" | rev | cut -c-32 | rev` ;;
+        Linux) md5=`md5sum "${1}" | cut -c-32` ;;
+    esac
+
+    if [ "${md5}" != "${2}" ]
+    then
+        log "MD5 check failed for ${1} (wanted ${2}, got ${md5})"
+        return 1
+    fi
+
+    log "MD5 check succeeded for ${1}"
 }
 
 # Download a URL to a local file. Accepts a name, URL and file.
